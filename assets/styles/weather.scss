@@ -1,0 +1,255 @@
+// *** Weather Report SCSS *** //
+
+:root {
+  --mapHeight: 380px;
+  --black: #000;
+  --red: #CD0D2E;
+
+  // --body-bg: #123;
+  // --nav-bg: rgb(60, 92, 115);
+  --body-bg: #424242;
+  --nav-bg: #808080;
+  --white: #fff;
+  --orange: #F2A23C;
+  --off-white: #F5F5F8;
+  --off-black: #1C1C1E;
+  --watch-face-dark: #343436;
+  --round-border: 50%;
+  --oblong-border: 30px;
+}
+
+body {
+  background-color: var(--black);
+  font-family: 'Dosis', sans-serif;
+  font-size: 10px;
+  overflow-x: hidden;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+h1, h2, h3, h4, h5, h6, p, input {
+  line-height: 1rem;
+  margin: 0.8rem 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+label, input, button {
+  font-size: 1rem;
+}
+
+header {
+  color: var(--off-white);
+}
+
+.cta {
+  color: var(--white);
+  text-decoration: none;
+  color: var(--orange);
+}
+
+@keyframes lineInserted {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--mapHeight); /* your line height here */
+  }
+}
+div[contenteditable] > div {
+  animation-duration: 0.3s;
+  animation-name: lineInserted;
+  transition: height 0.3s;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+main {
+  // background: black;
+
+  #weatherContainer {
+    font-family: "Dosis", sans-serif;
+    // max-width: 960px;
+    // min-width: 380px;
+    text-align: center;
+    header {
+
+      color: var(--white);
+    
+      a {
+        text-decoration: none;
+        color: var(--orange);
+      }
+    }
+
+    #formContainer, .weatherData {
+      border: solid var(--white) 10px;
+      border-radius: 10px;
+    }
+  
+    #formContainer {
+      gap: 2rem;
+      padding: 10px;
+      max-width: 660px;
+      padding: 10px;
+      margin-inline: auto;
+      color: var(--white);
+
+      #weatherForm {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+
+        #cityName, #citySelector {
+          font-family: 'Dosis', sans-serif;
+          background-color: var(--white);
+          color: var(--black);
+          border:none;
+          border-radius:10px;
+          padding: 5px;
+        }
+
+        #cityName {
+          margin: 0;
+        }
+      }
+    }
+
+    #weatherWrapper {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      gap: 0 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(345, 1fr));
+
+      #theWeather, #theMap {
+        margin-top: 10px;
+        text-align: left;
+      }
+    
+      #theWeather {
+        padding: 0 10px;
+        max-width: 345px;
+    
+        #weatherIcon {
+          float: left;
+          padding: 0 5px 5px 0;
+        }
+      }
+      
+      #theMap {
+        max-width: 365px;  
+        #mapEmbed {
+          max-width: 365px;
+          height: var(--mapHeight);
+
+          @media (width < 376px) {
+            max-width: 295px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.weatherData {
+  visibility: hidden;
+  transition: all .9s ease-in-out;
+  height: 0px;
+  min-height: 0px;
+  max-height: 90vh;
+  overflow: hidden;
+  color: var(--white);
+
+  &.open {
+    visibility: visible;
+    transition: all .3s ease-in-out;
+    min-height:var(--mapHeight);
+  }
+}
+
+.weather-modal {
+  font-family: "Dosis", sans-serif;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  gap: 0.4rem;
+  width: 360px;
+  padding: 1.3rem;
+  min-height: 150px;
+  position: absolute;
+  top: 40%;
+  background-color: white;
+  border: 1px solid #ddd;
+  color: var(--black);
+  border-radius: 15px;
+
+  .flex {
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 0.4rem 0 0.2rem;
+  }
+}
+
+#closeBtn {
+  // transform: translate(10px, -20px);
+  padding: 0.5rem 0.7rem;
+  background: var(--black);
+  border-radius: 10px;
+  align-self: flex-end;
+  color: var(--white);
+  border: none;
+  font-weight: 600;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+}
+
+#errMsg {
+  display: none;
+  flex-basis: 100%;
+  color: var(--red);
+}
+
+.hidden {
+  display: none;
+}
